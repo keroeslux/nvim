@@ -13,6 +13,7 @@ set clipboard=unnamedplus
 set cursorline
 set noswapfile
 set termguicolors
+set backupdir=~/.cache/vim
 nnoremap q :q!
 nnoremap <C-a> i
 nnoremap <C-t> :wq<CR>
@@ -23,6 +24,15 @@ inoremap <C-q> <C-c>
 
 let NERDTreeToggle=1
 let NERDTreeQuitOnOpen=1
+let g:dashboard_custom_header = [
+\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+\]
+
 
 call plug#begin('~/.config/nvim/plugged')
     Plug 'dracula/vim'
@@ -31,7 +41,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'dracula/vim'
     Plug 'tmsvg/pear-tree'
     Plug 'itchyny/lightline.vim'
-    Plug 'lukas-reineke/indent-blankline.nvim'
+   " Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'liuchengxu/vim-clap'
     Plug 'glepnir/dashboard-nvim' 
 call plug#end()
 colo dracula

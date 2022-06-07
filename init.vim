@@ -28,9 +28,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'dracula/vim'
     Plug 'preservim/nerdtree'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'mhinz/vim-startify'
     Plug 'dracula/vim'
     Plug 'tmsvg/pear-tree'
     Plug 'itchyny/lightline.vim'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'glepnir/dashboard-nvim' 
 call plug#end()
 colo dracula

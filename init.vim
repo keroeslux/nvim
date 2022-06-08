@@ -25,6 +25,7 @@ nnoremap <space> :
 nnoremap <C-n> :NERDTreeFocus<CR>
 inoremap jj <esc>
 inoremap <C-q> <C-c>
+" == These are my aliases to switch colorschemes
 command! Cat :colo catppuccin
 command! Nord :colo nord
 command! Make :!make
@@ -41,13 +42,15 @@ let g:dashboard_custom_header = [
 \ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
 \ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
 \]
-
+" == If nerdtree is last in the buffer, close it.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 call plug#begin('~/.config/nvim/plugged')
     Plug 'dracula/vim'
     Plug 'preservim/nerdtree'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'dracula/vim'
+    Plug 'psliwka/vim-smoothie'
     Plug 'tmsvg/pear-tree'
     Plug 'itchyny/lightline.vim'
     Plug 'catppuccin/nvim', {'as': 'catppuccin'}
@@ -55,9 +58,12 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'liuchengxu/vim-clap'
+    Plug 'sheerun/vim-polyglot'
     Plug 'glepnir/dashboard-nvim' 
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     Plug 'joshdick/onedark.vim'
+    Plug 'ryanoasis/vim-devicons'
     Plug 'shaunsingh/nord.nvim'
     Plug 'mbbill/undotree'
 call plug#end()
-colo onedark 
+colorscheme nord

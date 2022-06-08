@@ -1,3 +1,5 @@
+" == Lua Reqs
+
 set mouse=v
 set tabstop=4
 set number
@@ -20,7 +22,7 @@ nnoremap q :q!
 nnoremap <C-a> i
 nnoremap <C-t> :wq<CR>
 nnoremap t :NERDTreeToggle<CR>
-nnoremap <leader>ff <cmd>Telescope find_files<CR>
+nnoremap <space>ff <cmd>Telescope find_files<CR>
 nnoremap <space> : 
 nnoremap <C-n> :NERDTreeFocus<CR>
 inoremap jj <esc>
@@ -31,6 +33,19 @@ command! Nord :colo nord
 command! Make :!make
 command! Drac :colo dracula
 command! Oda :colo onedark
+" == Scripting 
+function Replace(from, to)
+    exec ":%s/" . from . "/" . to . "/g"
+endfunction
+function ShowBackground()
+    :echo &background
+endfunction
+
+
+" == Commands
+command! -nargs=1 Replace call Replace(<f-args>)
+command! ShowBackground call ShowBackground()
+
 let NERDTreeToggle=1
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1

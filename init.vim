@@ -21,10 +21,9 @@ set undofile
 nnoremap q :q!
 nnoremap <C-a> i
 nnoremap <C-t> :wq<CR>
-nnoremap t :NERDTreeToggle<CR>
+nnoremap t :NvimTreeToggle<CR>
 nnoremap <space>ff <cmd>Telescope find_files<CR>
 nnoremap <space> : 
-nnoremap <C-n> :NERDTreeFocus<CR>
 inoremap jj <esc>
 inoremap <C-q> <C-c>
 " == These are my aliases to switch colorschemes
@@ -62,7 +61,7 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 
 call plug#begin('~/.config/nvim/plugged')
     Plug 'dracula/vim'
-    Plug 'preservim/nerdtree'
+    Plug 'kyazdani42/nvim-tree.lua'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'dracula/vim'
     Plug 'psliwka/vim-smoothie'
@@ -75,10 +74,11 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'liuchengxu/vim-clap'
     Plug 'sheerun/vim-polyglot'
     Plug 'glepnir/dashboard-nvim' 
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     Plug 'joshdick/onedark.vim'
-    Plug 'ryanoasis/vim-devicons'
+    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'shaunsingh/nord.nvim'
     Plug 'mbbill/undotree'
 call plug#end()
-colorscheme nord
+lua require'nvim-tree'.setup {}
+highlight NvimTreeFolderIcon guibg=blue
+colorscheme catppuccin 

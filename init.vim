@@ -4,7 +4,7 @@ set mouse=v
 set tabstop=4
 set number
 set autoindent
-set ttyfast
+set ttyfast 
 syntax on
 set expandtab
 set incsearch
@@ -24,6 +24,7 @@ nnoremap <C-t> :wq<CR>
 nnoremap t :NvimTreeToggle<CR>
 nnoremap <space>ff <cmd>Telescope find_files<CR>
 nnoremap <space> : 
+nnoremap ;s :Replace
 inoremap jj <esc>
 inoremap <C-q> <C-c>
 " == These are my aliases to switch colorschemes
@@ -33,16 +34,16 @@ command! Make :!make
 command! Drac :colo dracula
 command! Oda :colo onedark
 " == Scripting 
-function Replace(from, to)
-    exec ":%s/" . from . "/" . to . "/g"
+function! Replace(from, to)
+    exec ":%s/" . a:from . "/" . a:to . "/g"
 endfunction
-function ShowBackground()
+function! ShowBackground()
     :echo &background
 endfunction
 
 
 " == Commands
-command! -nargs=1 Replace call Replace(<f-args>)
+command! -nargs=+ Replace :call Replace(<f-args>)
 command! ShowBackground call ShowBackground()
 
 let NERDTreeToggle=1

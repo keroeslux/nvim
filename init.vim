@@ -1,4 +1,14 @@
-" == Lua Reqs
+" == VARIABLES
+let mapleader = ";"
+let g:floaterm_keymap_toggle = '<Leader>ss'
+let g:dashboard_custom_header = [
+\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+\]
 
 set mouse=v
 set tabstop=4
@@ -21,12 +31,15 @@ set undofile
 nnoremap q :q!
 nnoremap <C-a> i
 nnoremap <C-t> :wq<CR>
-nnoremap t :NvimTreeToggle<CR>
-nnoremap <space>ff <cmd>Telescope find_files<CR>
+nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <Leader>ff <cmd>Telescope find_files<CR>
 nnoremap <space> : 
+nnoremap <Leader>f <cmd>tabnext<CR>
+nnoremap <Leader>r <cmd>tabprevious<CR>
 nnoremap ;s :Replace
 inoremap jj <esc>
 inoremap <C-q> <C-c>
+nnoremap <
 " == These are my aliases to switch colorschemes
 command! Cat :colo catppuccin
 command! Nord :colo nord
@@ -40,30 +53,21 @@ endfunction
 function! ShowBackground()
     :echo &background
 endfunction
-
-
 " == Commands
 command! -nargs=+ Replace :call Replace(<f-args>)
 command! ShowBackground call ShowBackground()
-
+command! -nargs=1 Mov :call MoveLine(<f-args>)
+" == Extra
 let NERDTreeToggle=1
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
-let g:dashboard_custom_header = [
-\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-\]
 " == If nerdtree is last in the buffer, close it.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 call plug#begin('~/.config/nvim/plugged')
     Plug 'dracula/vim'
-    Plug 'kyazdani42/nvim-tree.lua'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'preservim/nerdtree'
     Plug 'dracula/vim'
     Plug 'psliwka/vim-smoothie'
     Plug 'tmsvg/pear-tree'
@@ -74,12 +78,15 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'liuchengxu/vim-clap'
     Plug 'sheerun/vim-polyglot'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     Plug 'glepnir/dashboard-nvim' 
     Plug 'joshdick/onedark.vim'
-    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make' }
     Plug 'shaunsingh/nord.nvim'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'dbeniamine/cheat.sh-vim'
+    Plug 'voldikss/vim-floaterm'
+    Plug 'ryanoasis/vim-devicons'
     Plug 'mbbill/undotree'
 call plug#end()
-lua require'nvim-tree'.setup {}
-highlight NvimTreeFolderIcon guibg=blue
 colorscheme catppuccin 

@@ -1,6 +1,6 @@
 " == VARIABLES
 let mapleader = ";"
-let g:floaterm_keymap_toggle = '<Leader>ss'
+let g:floaterm_keymap_toggle = '<leader>ss'
 let g:dashboard_custom_header = [
 \ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
 \ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
@@ -31,15 +31,14 @@ set undofile
 nnoremap q :q!
 nnoremap <C-a> i
 nnoremap <C-t> :wq<CR>
-nnoremap <Leader>t :NERDTreeToggle<CR>
-nnoremap <Leader>ff <cmd>Telescope find_files<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <space> : 
-nnoremap <Leader>f <cmd>tabnext<CR>
-nnoremap <Leader>r <cmd>tabprevious<CR>
+nnoremap <leader>f <cmd>tabnext<CR>
+nnoremap <leader>r <cmd>tabprevious<CR>
 nnoremap ;s :Replace
 inoremap jj <esc>
 inoremap <C-q> <C-c>
-nnoremap <
 " == These are my aliases to switch colorschemes
 command! Cat :colo catppuccin
 command! Nord :colo nord
@@ -47,6 +46,13 @@ command! Make :!make
 command! Drac :colo dracula
 command! Oda :colo onedark
 " == Scripting 
+
+if &filetype ==# 'c' || &filetype ==# 'cpp'
+    let g:indent_blankline_enabled = v:true
+else
+    let g:indent_blankline_enabled = v:false
+endif
+
 function! Replace(from, to)
     exec ":%s/" . a:from . "/" . a:to . "/g"
 endfunction
@@ -67,6 +73,7 @@ autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | en
 call plug#begin('~/.config/nvim/plugged')
     Plug 'dracula/vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'mhinz/vim-signify'
     Plug 'preservim/nerdtree'
     Plug 'dracula/vim'
     Plug 'psliwka/vim-smoothie'

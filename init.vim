@@ -32,13 +32,18 @@ nnoremap q :q!
 nnoremap <C-a> i
 nnoremap <C-t> :wq<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>fh  <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>x xxxx
+nnoremap <leader>bb <cmd>TroubleToggle workspace_diagnostics<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <space> : 
 nnoremap <leader>f <cmd>tabnext<CR>
+nnoremap <leader>q :call CopyCodeBlockToClipboard()
 nnoremap <leader>r <cmd>tabprevious<CR>
 nnoremap ;s :Replace
 inoremap jj <esc>
 inoremap <C-q> <C-c>
+inoremap <C-a> ;
 " == These are my aliases to switch colorschemes
 command! Cat :colo catppuccin
 command! Nord :colo nord
@@ -58,6 +63,22 @@ function! Replace(from, to)
 endfunction
 function! ShowBackground()
     :echo &background
+endfunction
+function! CopyCodeBlockToClipboard() 
+    let cursor_pos = getpos('.')
+    let i = 1
+    let done = 0
+    while !done
+        call setpos('.', cursor_pos)
+        execute "normal" 'v' . i . 'aBVok"*y'
+        if mode() =~ "^[vV]"
+            let done = 1
+        else
+            let i = i + 1
+        endif
+    endwhile
+    execute "normal \<ESC>"
+    call setpos('.', cursor_pos)
 endfunction
 " == Commands
 command! -nargs=+ Replace :call Replace(<f-args>)
@@ -92,6 +113,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'shaunsingh/nord.nvim'
     Plug 'junegunn/vim-easy-align'
     Plug 'dbeniamine/cheat.sh-vim'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'folke/trouble.nvim'
     Plug 'voldikss/vim-floaterm'
     Plug 'ryanoasis/vim-devicons'
     Plug 'mbbill/undotree'

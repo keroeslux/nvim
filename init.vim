@@ -1,14 +1,5 @@
 " == VARIABLES
 let mapleader = ";"
-"let g:dashboard_custom_header = [
-"\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-"\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-"\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-"\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-"\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-"\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-"\]
-
 set mouse=v
 set tabstop=4
 set number
@@ -38,14 +29,7 @@ nnoremap ;s :Replace
 inoremap jj <esc>
 inoremap <C-q> <C-c>
 inoremap <C-a> ;
-" == These are my aliases to switch colorschemes
-"command! Cat :colo catppuccin
-"command! Nord :colo nord
-"command! Make :!make
-"command! Drac :colo dracula
-"command! Oda :colo onedark
 " == Scripting 
-
 if &filetype ==# 'c' || &filetype ==# 'cpp'
     let g:indent_blankline_enabled = v:true
 else
@@ -77,10 +61,12 @@ endfunction
 " == Commands
 command! -nargs=+ Replace :call Replace(<f-args>)
 command! ShowBackground call ShowBackground()
-command! -nargs=1 Mov :call MoveLine(<f-args>)
 " == Extra
 call plug#begin('~/.config/nvim/plugged')
     Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'} " run :CHADdeps after
     Plug 'dracula/vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'tmsvg/pear-tree'
 call plug#end()
 colorscheme dracula 

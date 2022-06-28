@@ -29,6 +29,10 @@ nnoremap ;s :Replace
 inoremap jj <esc>
 inoremap <C-q> <C-c>
 inoremap <C-a> ;
+nnoremap <Leader>o :call ViewHtmlText()<CR> 
+" stuff for html
+inoremap <Leader>1 <h1></h1>
+let g:user_emmet_leader_key='<Leader>w'
 " == Scripting 
 if &filetype ==# 'c' || &filetype ==# 'cpp'
     let g:indent_blankline_enabled = v:true
@@ -58,6 +62,14 @@ function! CopyCodeBlockToClipboard()
     execute "normal \<ESC>"
     call setpos('.', cursor_pos)
 endfunction
+function! ViewHtmlText()
+    if &filetype ==# 'html'
+        exec ":!firefox " . "%"
+    else
+        echo "Failed to open filetype: " . &filetype
+    endif
+endfunction
+" Save and view text for current html file.
 " == Commands
 command! -nargs=+ Replace :call Replace(<f-args>)
 command! ShowBackground call ShowBackground()
@@ -68,5 +80,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'tmsvg/pear-tree'
+    Plug 'folke/tokyonight.nvim'
+    Plug 'mattn/emmet-vim'
+    Plug 'vim-airline/vim-airline'
 call plug#end()
 colorscheme dracula 
